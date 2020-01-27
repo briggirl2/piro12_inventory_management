@@ -25,3 +25,11 @@ def company_detail(request, pk):
         'item_list': qs,
     })
 
+
+def item_detail(request, pk):
+    item = get_object_or_404(Item, pk=pk)
+    company = get_object_or_404(Company, name=item.company)
+    return render(request, 'inventory/item_detail.html', {
+        'item': item,
+        'company': company,
+    })

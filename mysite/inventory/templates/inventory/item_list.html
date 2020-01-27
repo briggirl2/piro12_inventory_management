@@ -12,7 +12,7 @@
                 {% endif %}
 
                 <div class="card-body">
-                    <h5 class="card-title"><a href="{% url 'inventory:item_list' item.id %}">{{ item.name }}</a></h5>
+                    <h5 class="card-title"><a href="{% url 'inventory:item_detail' item.id %}">{{ item.name }}</a></h5>
                     <p class="card-text">
                         가격 : {{ item.price }}<br><br>
                         남은 수량 : {{ item.remain }}<br>

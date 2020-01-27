@@ -1,0 +1,23 @@
+{% extends "inventory/layout.html" %}
+
+{% block content %}
+    {% if item.photo %}
+        <img src="{{ item.photo.url }}" alt="img" width="100%"/>
+    {% else %}
+        <img src="https://rimage.gnst.jp/livejapan.com/public/img/common/noimage.jpg?20191216050037" alt="img"/>
+    {% endif %}
+
+    <h2>{{ item.name }}</h2>
+
+    가격: {{ item.price }}<br /><br />
+    수량: {{ item.remain }}<br /><br />
+    제품 설명:<br/>{{ item.desc|linebreaksbr }}<br /><br />
+    <a href="{% url "inventory:company_detail" company.pk %}">
+     거래처: {{ item.company }}
+    </a>
+
+    <hr/>
+    <a href="">수정</a><br/>
+    <a href="">삭제</a><br/>
+    <a href="{% url "inventory:item_list" %}">목록</a><br/><br/>
+{% endblock %}
