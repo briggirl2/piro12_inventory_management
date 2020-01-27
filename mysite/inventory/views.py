@@ -1,4 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.views.generic import CreateView, UpdateView
+
+from inventory.forms import ItemForm
 from inventory.models import Item, Company
 
 
@@ -7,6 +10,25 @@ def item_list(request):
     return render(request, 'inventory/item_list.html', {
         'item_list': qs,
     })
+
+
+def item_detail(request, pk):
+    item = get_object_or_404(Item, pk=pk)
+    company = get_object_or_404(Company, name=item.company)
+    return render(request, 'inventory/item_detail.html', {
+        'item': item,
+        'company': company,
+    })
+
+
+item_create = CreateView.as_view(model=Item, form_class=ItemForm)
+item_update = UpdateView.as_view(model=Item, form_class=ItemForm)
+
+
+def item_delete(request, pk):
+    item = Item.objects.get(pk=pk)
+    item.delete()
+    return redirect('inventory:item_list')
 
 
 def company_list(request):
@@ -22,15 +44,6 @@ def company_detail(request, pk):
     return render(request, 'inventory/company_detail.html', {
         'company': company,
         'item_list': qs,
-    })
-
-
-def item_detail(request, pk):
-    item = get_object_or_404(Item, pk=pk)
-    company = get_object_or_404(Company, name=item.company)
-    return render(request, 'inventory/item_detail.html', {
-        'item': item,
-        'company': company,
     })
 
 

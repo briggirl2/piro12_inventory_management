@@ -18,7 +18,7 @@
     </a>
 
     <hr/>
-    <a href="">수정</a><br/>
-    <a href="">삭제</a><br/>
+    <a href="{% url "inventory:item_update" item.pk %}">수정</a><br/>
+    <a href="{% url "inventory:item_delete" item.pk %}">삭제</a><br/>
     <a href="{% url "inventory:item_list" %}">목록</a><br/><br/>
 {% endblock %}
