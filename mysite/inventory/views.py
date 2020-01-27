@@ -1,5 +1,27 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+
+from inventory.models import Item, Company
 
 
 def item_list(request):
-    return render(request, 'inventory/layout.html')
+    qs = Item.objects.all()
+    return render(request, 'inventory/item_list.html', {
+        'item_list': qs,
+    })
+
+
+def company_list(request):
+    qs = Company.objects.all()
+    return render(request, 'inventory/company_list.html', {
+        'company_list': qs,
+    })
+
+
+def company_detail(request, pk):
+    company = get_object_or_404(Company, pk=pk)
+    qs = Item.objects.filter(company=company)
+    return render(request, 'inventory/company_detail.html', {
+        'company': company,
+        'item_list': qs,
+    })
+

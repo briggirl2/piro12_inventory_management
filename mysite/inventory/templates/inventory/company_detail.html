@@ -1,0 +1,25 @@
+{% extends "inventory/layout.html" %}
+
+{% block content %}
+    <h2>{{ company.name }}</h2>
+
+    {% if company.phone_number %}
+        <p>
+            {{ company.phone_number }}
+        </p>
+    {% endif %}
+    {% if company.address %}
+        <p>
+            {{ company.address }}
+        </p>
+    {% endif %}
+    <hr/>
+    <h4>거래 상품 목록</h4>
+    {% for item in item_list %}
+        <a href="{% url "inventory:item_detail"gst item.pk %}">item.name</a>
+    {% endfor %}
+    <hr/>
+    <a href="">수정</a>
+    <a href="">삭제</a>
+    <a href="{% url "inventory:company_list" %}">목록</a>
+{% endblock %}
