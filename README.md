@@ -15,7 +15,7 @@ create/ [name='item_create']<br>
 update/<int:pk> [name='item_update']<br>
 delete/<int:pk> [name='item_delete']<br>
 plus/<int:pk> [name='item_plus']<br>
-minus/<int:pk> [name='item_minus']<br>
+minus/<int:pk> [name='item_minus']<br><br>
 
 company/ [name='company_list']<br>
 company/detail/<int:pk> [name='company_detail']<br>
