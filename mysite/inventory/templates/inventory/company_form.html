@@ -1,0 +1,14 @@
+{% extends "inventory/layout.html" %}
+
+{% block content %}
+    <h2>거래처 등록</h2>
+
+    <form action="" method="POST" >
+        {% csrf_token %}
+        <p>이름: <input type="text" name="name"></p>
+        <p>전화번호: <input type="text" name="phone_number"></p>
+        <p>주소: <input type="text" name="address"></p>
+        <input type="submit" value="등록" class="btn btn-primary"/>
+    </form>
+
+{% endblock %}

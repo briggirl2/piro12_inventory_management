@@ -19,7 +19,8 @@
         <a href="{% url "inventory:item_detail" item.pk %}">{{ item.name }}<br/></a>
     {% endfor %}
     <hr/>
-    <a href="">수정</a><br/>
-    <a href="">삭제</a><br/>
+    <a href="{% url "inventory:company_update" company.pk %}">수정</a><br/>
+    <a href="{% url "inventory:company_delete" company.pk %}">삭제</a><br/>
     <a href="{% url "inventory:company_list" %}">목록</a><br/><br/>
+
 {% endblock %}

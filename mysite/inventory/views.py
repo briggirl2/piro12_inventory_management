@@ -1,5 +1,4 @@
-from django.shortcuts import render, get_object_or_404
-
+from django.shortcuts import render, get_object_or_404, redirect
 from inventory.models import Item, Company
 
 
@@ -33,3 +32,38 @@ def item_detail(request, pk):
         'item': item,
         'company': company,
     })
+
+
+def company_create(request):
+    if request.method == 'GET':
+        return render(request, 'inventory/company_form.html', {})
+    elif request.method == 'POST':
+        name = request.POST['name']
+        phone_number = request.POST['phone_number']
+        address = request.POST['address']
+        company = Company.objects.create(name=name, phone_number=phone_number, address=address)
+        return redirect('inventory:company_detail', company.id)
+
+
+def company_update(request, pk):
+    company = Company.objects.get(pk=pk)
+
+    if request.method == 'GET':
+        return render(request, 'inventory/company_update.html', {'company': company})
+
+    elif request.method == 'POST':
+        name = request.POST['name']
+        phone_number = request.POST['phone_number']
+        address = request.POST['address']
+        company.name = name
+        company.phone_number = phone_number
+        company.address = address
+        company.save()
+        return redirect('inventory:company_detail', company.id)
+
+
+def company_delete(request, pk):
+    company = Company.objects.get(pk=pk)
+    company.delete()
+    return redirect('inventory:company_list')
+
