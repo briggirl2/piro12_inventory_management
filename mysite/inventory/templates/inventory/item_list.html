@@ -1,4 +1,6 @@
 {% extends "inventory/layout.html" %}
+{% load humanize %}
+
 {% block content %}
     {{ block.super }}
     <div class="row row-cols-1 row-cols-md-3">
@@ -14,7 +16,7 @@
                 <div class="card-body">
                     <h5 class="card-title"><a href="{% url 'inventory:item_detail' item.id %}">{{ item.name }}</a></h5>
                     <p class="card-text">
-                        가격 : {{ item.price }}<br><br>
+                        가격 : {{ item.price|intcomma }}<br><br>
                         남은 수량 : {{ item.remain }}<br>
                     </p>
                 </div>

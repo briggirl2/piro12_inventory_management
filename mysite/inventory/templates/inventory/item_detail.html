@@ -1,4 +1,5 @@
 {% extends "inventory/layout.html" %}
+{% load humanize %}
 
 {% block content %}
     {% if item.photo %}
@@ -9,7 +10,7 @@
 
     <h2>{{ item.name }}</h2>
 
-    가격: {{ item.price }}<br /><br />
+    가격: {{ item.price|intcomma }}<br /><br />
     수량: {{ item.remain }}<br /><br />
     제품 설명:<br/>{{ item.desc|linebreaksbr }}<br /><br />
     <a href="{% url "inventory:company_detail" company.pk %}">
