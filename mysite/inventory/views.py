@@ -31,6 +31,21 @@ def item_delete(request, pk):
     return redirect('inventory:item_list')
 
 
+def item_plus(request, pk):
+    item = Item.objects.get(pk=pk)
+    item.remain += 1
+    item.save()
+    return redirect('inventory:item_list')
+
+
+def item_minus(request, pk):
+    item = Item.objects.get(pk=pk)
+    if item.remain != 0:
+        item.remain -= 1
+        item.save()
+    return redirect('inventory:item_list')
+
+
 def company_list(request):
     qs = Company.objects.all()
     return render(request, 'inventory/company_list.html', {

@@ -5,23 +5,33 @@
     {{ block.super }}
     <div class="row row-cols-1 row-cols-md-3">
         {% for item in item_list %}
-        <div class="col mb-4">
-            <div class="card">
-                {% if item.photo %}
-                    <img src="{{ item.photo.url }}" class="card-img-top" alt="img" width="100%"/>
-                {% else %}
-                    <img src="https://rimage.gnst.jp/livejapan.com/public/img/common/noimage.jpg?20191216050037" class="card-img-top" alt="img" />
-                {% endif %}
+            <div class="col mb-4">
+                <div class="card">
+                    {% if item.photo %}
+                        <img src="{{ item.photo.url }}" class="card-img-top" alt="img" width="100%"/>
+                    {% else %}
+                        <img src="https://rimage.gnst.jp/livejapan.com/public/img/common/noimage.jpg?20191216050037"
+                             class="card-img-top" alt="img"/>
+                    {% endif %}
 
-                <div class="card-body">
-                    <h5 class="card-title"><a href="{% url 'inventory:item_detail' item.id %}">{{ item.name }}</a></h5>
-                    <p class="card-text">
-                        가격 : {{ item.price|intcomma }}<br><br>
-                        남은 수량 : {{ item.remain }}<br>
-                    </p>
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="{% url 'inventory:item_detail' item.id %}">{{ item.name }}</a>
+                        </h5>
+                        <p class="card-text">
+                            가격 : {{ item.price|intcomma }}<br><br>
+                            남은 수량 : {{ item.remain }}<br><br>
+                        <form action="{% url "inventory:item_plus" item.pk %}" method="post">
+                        {% csrf_token %}
+                            <input type="submit" value="+">
+                        </form>
+                        <form action="{% url "inventory:item_minus" item.pk %}" method="post">
+                        {% csrf_token %}
+                            <input type="submit" value="- ">
+                        </form>
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
         {% endfor %}
     </div>
     </ul>
